@@ -1,4 +1,4 @@
-#include "string.h"
+#include "string/string.h"
 
 using namespace std;
 
@@ -20,16 +20,18 @@ ostream& operator<<(ostream& os, String& output)
 
 int main()
 {
-	cout << "Enter three lines" << endl;
-	
-	const int count = 3;
-	String lines[count];
+	const int count = 5;
+
+	String lines[count]
+	{
+		"X01",
+		"Z01",
+		"Z11",
+		"Y23",
+		"Z34"
+	};
 
 	for (int i = 0; i < count; i++) {
-		cin >> lines[i];
-	}
-
-	for (int i = 0; i < count; i++) {
-		cout << lines[i];
+		cout << lines[i] << endl;
 	}
 }

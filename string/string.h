@@ -23,9 +23,3 @@ public:
 private:
 	char* arr;
 };
-
-/*istream& operator>>(istream& is, String& input)
-{
-	is >> input.GetArray();
-	return is;
-}*/

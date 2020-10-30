@@ -16,7 +16,7 @@ class String
 		void SetArray(const char* arr);
 
 		// operators
-		int operator[](int index);
+		char& operator[](int index);
 		bool operator>(const String& other);
 		bool operator<(const String& other);
 		String operator+(const String& other);

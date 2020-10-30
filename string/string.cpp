@@ -55,7 +55,7 @@ void String::SetArray(const char* arr)
 	strcpy_s(m_arr, m_size, arr);
 }
 
-int String::operator[](int index)
+char& String::operator[](int index)
 {
 	if (index > -1 && index < m_size)
 		return m_arr[index];

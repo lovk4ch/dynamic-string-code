@@ -57,7 +57,10 @@ void String::SetArray(const char* arr)
 
 int String::operator[](int index)
 {
-	return m_arr[index];
+	if (index < m_size)
+		return m_arr[index];
+
+	return m_arr[0];
 }
 
 bool String::operator>(const String& other)

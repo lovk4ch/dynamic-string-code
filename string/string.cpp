@@ -4,70 +4,96 @@ using namespace std;
 
 String::String()
 {
-	this->Size = 0;
-	this->arr = nullptr;
+	m_size = 0;
+	m_arr = nullptr;
 }
 
 String::~String()
 {
-	delete[] this->arr;
+	delete[] m_arr;
 }
 
 String::String(const char* arr)
 {
-	this->Size = strlen(arr);
-	this->arr = new char[this->Size + 1];
-
-	for (int i = 0; i < this->Size; i++) {
-		this->arr[i] = arr[i];
-	}
-	this->arr[this->Size] = '\0';
+	SetArray(arr);
 }
 
 String::String(const String &other)
 {
-	SetArray(other.arr);
+	SetArray(other.m_arr);
+}
+
+String::String(String&& other) noexcept
+{
+	m_size = other.m_size;
+	m_arr = other.m_arr;
+	other.m_arr = nullptr;
+}
+
+int String::GetSize()
+{
+	return m_size;
 }
 
 char* String::GetArray()
 {
-	return this->arr;
+	return m_arr;
 }
 
-void String::SetArray(char* arr)
+/// <summary>
+/// Set char buffer
+/// </summary>
+/// <param name="arr">null terminated string</param>
+void String::SetArray(const char* arr)
 {
-	this->Size = strlen(arr);
-	this->arr = new char[this->Size + 1];
-
-	for (int i = 0; i < this->Size; i++) {
-		this->arr[i] = arr[i];
+	if (!m_arr) {
+		delete[] m_arr;
 	}
-	this->arr[this->Size] = '\0';
+
+	m_size = strlen(arr) + 1;
+	m_arr = new char[m_size];
+	strcpy_s(m_arr, m_size, arr);
+}
+
+int String::operator[](int index)
+{
+	return m_arr[index];
+}
+
+bool String::operator>(const String& other)
+{
+	int size = m_size < other.m_size ? m_size : other.m_size;
+
+	for (int i = 0; i != size; i++) {
+		if (m_arr[i] != other.m_arr[i]) {
+			return m_arr[i] > other.m_arr[i];
+		}
+	}
+	return true;
+}
+
+bool String::operator<(const String& other)
+{
+	return !operator>(other);
 }
 
 String String::operator+(const String& other)
 {
-	int Size = this->Size + other.Size + 1;
-	String concat(new char[Size]);
+	int size = m_size + other.m_size + 1;
+	String concat(new char[size]);
 
-	int i;
-	for (i = 0; i < this->Size; i++) {
-		concat.arr[i] = this->arr[i];
-	}
-	int j;
-	for (j = 0; i < Size - 1; i++, j++) {
-		concat.arr[i] = other.arr[j];
-	}
-	concat.arr[Size - 1] = '\0';
+	strcpy_s(concat.m_arr, m_size, m_arr);
+	strcpy_s(concat.m_arr + m_size - 1, other.m_size + 1, other.m_arr);
+
 	return concat;
 }
 
 String& String::operator=(const String &other)
 {
-	if (this->arr != nullptr) {
-		delete[] this->arr;
+	if (m_arr) {
+		delete[] m_arr;
 	}
 
-	SetArray(other.arr);
+	SetArray(other.m_arr);
 	return *this;
 }

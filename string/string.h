@@ -2,24 +2,27 @@
 
 class String
 {
-public:
-	// constructors / destructors
-	String();
-	~String();
-	String(const char* arr);
-	String(const String& other);
+	public:
+		// constructors / destructors
+		String();
+		~String();
+		String(const char* arr);
+		String(const String& other);
+		String(String&& other) noexcept;
 
-	// props
-	int Size;
+		// methods
+		int GetSize();
+		char* GetArray();
+		void SetArray(const char* arr);
 
-	// methods
-	char* GetArray();
-	void SetArray(char* arr);
+		// operators
+		int operator[](int index);
+		bool operator>(const String& other);
+		bool operator<(const String& other);
+		String operator+(const String& other);
+		String& operator=(const String& other);
 
-	// operators
-	String operator+(const String& other);
-	String& operator=(const String& other);
-
-private:
-	char* arr;
+	private:
+		char* m_arr;
+		int m_size;
 };

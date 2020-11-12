@@ -65,13 +65,12 @@ char& String::operator[](size_t index)
 
 bool String::operator>(const String& other)
 {
-	size_t size = m_size < other.m_size ? m_size : other.m_size;
 	return strcmp(m_arr, other.m_arr) > 0;
 }
 
 bool String::operator<(const String& other)
 {
-	return !operator>(other);
+	return strcmp(m_arr, other.m_arr) < 0;
 }
 
 String String::operator+(const String& other)

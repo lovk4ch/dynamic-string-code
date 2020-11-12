@@ -63,13 +63,13 @@ char& String::operator[](size_t index)
 	return m_arr[0];
 }
 
-int String::operator>(const String& other)
+bool String::operator>(const String& other)
 {
 	size_t size = m_size < other.m_size ? m_size : other.m_size;
 	return strcmp(m_arr, other.m_arr) > 0;
 }
 
-int String::operator<(const String& other)
+bool String::operator<(const String& other)
 {
 	return !operator>(other);
 }

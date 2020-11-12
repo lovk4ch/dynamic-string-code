@@ -17,8 +17,8 @@ class String
 
 		// operators
 		char& operator[](size_t index);
-		bool operator>(const String& other);
-		bool operator<(const String& other);
+		int operator>(const String& other);
+		int operator<(const String& other);
 		String operator+(const String& other);
 		String& operator=(const String& other);
 

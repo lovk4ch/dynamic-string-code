@@ -11,12 +11,12 @@ class String
 		String(String&& other) noexcept;
 
 		// methods
-		int GetSize();
+		size_t GetSize();
 		char* GetArray();
 		void SetArray(const char* arr);
 
 		// operators
-		char& operator[](int index);
+		char& operator[](size_t index);
 		bool operator>(const String& other);
 		bool operator<(const String& other);
 		String operator+(const String& other);
@@ -24,5 +24,5 @@ class String
 
 	private:
 		char* m_arr;
-		int m_size;
+		size_t m_size;
 };

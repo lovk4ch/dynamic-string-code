@@ -30,7 +30,7 @@ String::String(String&& other) noexcept
 	other.m_arr = nullptr;
 }
 
-int String::GetSize()
+size_t String::GetSize()
 {
 	return m_size;
 }
@@ -55,9 +55,9 @@ void String::SetArray(const char* arr)
 	strcpy_s(m_arr, m_size, arr);
 }
 
-char& String::operator[](int index)
+char& String::operator[](size_t index)
 {
-	if (index > -1 && index < m_size)
+	if (index < m_size)
 		return m_arr[index];
 
 	return m_arr[0];
@@ -65,9 +65,9 @@ char& String::operator[](int index)
 
 bool String::operator>(const String& other)
 {
-	int size = m_size < other.m_size ? m_size : other.m_size;
+	size_t size = m_size < other.m_size ? m_size : other.m_size;
 
-	for (int i = 0; i != size; i++) {
+	for (int i = 0; i != size; ++i) {
 		if (m_arr[i] != other.m_arr[i]) {
 			return m_arr[i] > other.m_arr[i];
 		}
